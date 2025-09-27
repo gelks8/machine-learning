@@ -101,7 +101,7 @@ def holdout_evaluate(pipe, X_train, X_test, y_train, y_test):
 def print_cv_results(name, results):
   print(f"\n--- CV results for {name} ---")
   for metric, (mean, std) in results.items():
-      print(f"{metric}: {mean:.4f} ± {std:.4f}")
+    print(f"{metric}: {mean:.4f} ± {std:.4f}")
 
 def plot_and_save_cm(cm, labels, outpath):
   disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=labels)
@@ -139,9 +139,9 @@ def main(args):
   df['sentiment'] = df['sentiment'].astype(str).str.lower().str.strip()
   # se numeric (ex: 1-5), mapear para positivo/negativo (exemplo)
   if pd.api.types.is_numeric_dtype(df['sentiment']):
-      # simples: >=4 positivo, <=2 negativo, 3 neutro (remover)
-      df = df[df['sentiment'] != 3]
-      df['sentiment'] = df['sentiment'].apply(lambda s: 'positivo' if s >= 4 else 'negativo')
+    # simples: >=4 positivo, <=2 negativo, 3 neutro (remover)
+    df = df[df['sentiment'] != 3]
+    df['sentiment'] = df['sentiment'].apply(lambda s: 'positivo' if s >= 4 else 'negativo')
 
   # opcional: filtrar apenas positivo/negativo
   df = df[df['sentiment'].isin(['positivo','negativo','positive','negative','pos','neg','0','1'])]
@@ -184,7 +184,7 @@ def main(args):
   # Grid Search opcional para LR (exemplo simples)
   print("\nExecutando GridSearchCV simples para Logistic Regression (opcional)...")
   param_grid = {
-      'clf__C': [0.01, 0.1, 1, 10],
+    'clf__C': [0.01, 0.1, 1, 10],
   }
   skf = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
   scorer = make_scorer(f1_score, pos_label="positivo")
